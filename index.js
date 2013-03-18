@@ -100,51 +100,58 @@ module.exports = function(){
 		}
 	}
 	
-	var Class = require("uberclass");
-	var events = require("events");
-	
-	Class.util = {
-		ExposeMethods : function(methods, target){
-			var result = {};
+	try{
+		//try to extends uberclass
+		var Class = require("uberclass");
+		var events = require("events");
 
-			methods.forEach(function(method){
-				//link the methods
-				result[method] = function(){
-					target[method].apply(target, arguments);
-				}
-			});
-			
-			return result;
+		Class.util = {
+			ExposeMethods : function(methods, target){
+				var result = {};
+
+				methods.forEach(function(method){
+					//link the methods
+					result[method] = function(){
+						target[method].apply(target, arguments);
+					}
+				});
+
+				return result;
+			}
 		}
+
+		Class.EventEmitterClass = Class.extend({},{
+			init : function(){
+				this.emitter = new events.EventEmitter();
+			},
+			addListener : function(evt, cb){
+				this.emitter.addListener(evt, cb);
+			},
+			on : function(evt, cb){
+				this.emitter.on(evt, cb);
+			},
+			once : function(evt, cb){
+				this.emitter.once(evt, cb);
+			},
+			removeListener : function(evt, cb){
+				this.emitter.removeListener(evt, cb);
+			},
+			removeAllListeners : function(evt){
+				this.emitter.removeAllListeners(evt);
+			},
+			setMaxListeners : function(n){
+				this.emitter.setMaxListeners(n);
+			},
+			listeners : function(evt){
+				return this.emitter.listeners(evt);
+			},
+			emit : function(evt, cb){
+				this.emitter.emit(evt, cb);
+			}
+		});
+		
+	}catch(err){
+		console.log("Unable to extend uberclass");
 	}
 	
-	Class.EventEmitterClass = Class.extend({},{
-		init : function(){
-			this.emitter = new events.EventEmitter();
-		},
-		addListener : function(evt, cb){
-			this.emitter.addListener(evt, cb);
-		},
-		on : function(evt, cb){
-			this.emitter.on(evt, cb);
-		},
-		once : function(evt, cb){
-			this.emitter.once(evt, cb);
-		},
-		removeListener : function(evt, cb){
-			this.emitter.removeListener(evt, cb);
-		},
-		removeAllListeners : function(evt){
-			this.emitter.removeAllListeners(evt);
-		},
-		setMaxListeners : function(n){
-			this.emitter.setMaxListeners(n);
-		},
-		listeners : function(evt){
-			return this.emitter.listeners(evt);
-		},
-		emit : function(evt, cb){
-			this.emitter.emit(evt, cb);
-		}
-	})
 }

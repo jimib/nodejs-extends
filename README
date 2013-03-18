@@ -1,6 +1,6 @@
 # Extends String, Array, Object...
 
-It should be noted that this only binds helper methods as static, not instance
+It should be noted that this only binds helper methods as static methods (not instance!!!)
 
 # Additional Classes
 
