@@ -1,0 +1,6 @@
+{
+  "name": "extends",
+  "description": "Extends some of the core Classes used in NodeJs such as String and Array",
+  "version": "0.0.1",
+  "author": "jimib <jimi.bailey@gmail.com>"
+}

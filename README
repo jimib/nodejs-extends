@@ -1,0 +1,7 @@
+# Extends String, Array, Object...
+
+It should be noted that this only binds helper methods as static, not instance
+
+# Additional Classes
+
+I make use of uberclass, but this is not a strict dependence. If your project has uberclass it will be extended to include EventEmitterClass which can be binded to for events.
