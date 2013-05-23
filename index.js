@@ -99,6 +99,32 @@ Object.merge = function(a, b, boolOverride){
 	}
 }
 
+Object.forEachAsync = function(obj, action, cb){
+	var arr = [];
+	var cnt = 0;
+	for(var i in obj){
+		arr[cnt++] = i;
+	}
+	
+	var self = arr;
+	var i = - 1;
+	var lim = Array.isArray(arr) ? arr.length : 0;
+
+	next();
+
+	function next(){
+		if(++i < lim){
+			var id = self[i];
+			action(id, obj[id], function(err, result){
+				//self[i] = result || self[i];//? - WHAT IS THIS LINE DOING - NO IDEA COMMENTED OUT
+				next();
+			});
+		}else{
+			cb();
+		}
+	}
+}
+
 try{
 	//try to extends uberclass
 	var Class = require("uberclass");
