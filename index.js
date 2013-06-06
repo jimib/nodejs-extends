@@ -125,6 +125,36 @@ Object.forEachAsync = function(obj, action, cb){
 	}
 }
 
+//extend today
+Date.nowUTC = function(){
+	var now = new Date();
+	var now_utc = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+	return now_utc;
+}
+
+Date.today = function(){
+	var date = Date.nowUTC();
+	date.setUTCHours(0);
+	date.setUTCMinutes(0);
+	date.setUTCSeconds(0);
+	return date;
+}
+
+var DAY = 1000 * 60 * 60 * 24;
+
+Date.tomorrow = function(){
+	var date = Date.today();
+	date.setTime(date.getTime() + 1 * DAY);
+	console.log("Tomorrow: ", date);
+	return date;
+}
+
+Date.yesterday = function(){
+	var date = Date.today();
+	date.setTime(date.getTime() - 1 * DAY);
+	return date;
+}
+
 try{
 	//try to extends uberclass
 	var Class = require("uberclass");
