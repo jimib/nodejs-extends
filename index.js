@@ -134,9 +134,13 @@ Date.nowUTC = function(){
 
 Date.today = function(){
 	var date = Date.nowUTC();
+	
 	date.setUTCHours(0);
 	date.setUTCMinutes(0);
 	date.setUTCSeconds(0);
+	date.setUTCMilliseconds(0);
+	
+	console.log("today: "+date.getTime());
 	return date;
 }
 
