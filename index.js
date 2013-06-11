@@ -140,7 +140,6 @@ Date.today = function(){
 	date.setUTCSeconds(0);
 	date.setUTCMilliseconds(0);
 	
-	console.log("today: "+date.getTime());
 	return date;
 }
 
@@ -149,7 +148,6 @@ var DAY = 1000 * 60 * 60 * 24;
 Date.tomorrow = function(){
 	var date = Date.today();
 	date.setTime(date.getTime() + 1 * DAY);
-	console.log("Tomorrow: ", date);
 	return date;
 }
 
