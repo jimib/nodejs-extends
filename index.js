@@ -74,7 +74,6 @@ Array.removeItem = function(arr, item){
 	try{
 		if(Array.isArray(arr)){
 			var index = arr.indexOf(item);
-			console.log("Removing item: ", index);
 			if(index != -1){
 				arr.splice(index, 1);
 				return true;
